@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lidor Levin - Personal Financial Guidance</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400;500;600;700" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#00A99D",
+            "accent": "#FF6F61",
+            "background-light": "#F7F7F7",
+            "background-dark": "#1a1a1a",
+            "text-light": "#333333",
+            "text-dark": "#F7F7F7",
+            "text-subtle-light": "#555555",
+            "text-subtle-dark": "#aaaaaa",
+            "border-light": "#e0e0e0",
+            "border-dark": "#444444",
+          },
+          fontFamily: {
+            "display": ["Manrope", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "1rem",
+            "lg": "1.5rem",
+            "xl": "2rem",
+            "2xl": "2.5rem",
+            "full": "9999px"
+          },
+          keyframes: {
+            'gradient-bg': {
+              '0%, 100%': {
+                'background-position': '0% 50%'
+              },
+              '50%': {
+                'background-position': '100% 50%'
+              },
+            },
+            'float': {
+                '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
+                '50%': { transform: 'translateY(-20px) rotate(5deg)' },
+            },
+            'float-reverse': {
+                '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
+                '50%': { transform: 'translateY(20px) rotate(-5deg)' },
+            },
+            'fadeIn': {
+                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            'slideInLeft': {
+                '0%': { opacity: '0', transform: 'translateX(-50px)' },
+                '100%': { opacity: '1', transform: 'translateX(0)' },
+            },
+            'slideInRight': {
+                '0%': { opacity: '0', transform: 'translateX(50px)' },
+                '100%': { opacity: '1', transform: 'translateX(0)' },
+            },
+            'pulse-glow': {
+                '0%, 100%': { boxShadow: '0 0 20px rgba(0, 169, 157, 0.3)' },
+                '50%': { boxShadow: '0 0 40px rgba(0, 169, 157, 0.6)' },
+            }
+          },
+          animation: {
+            'gradient-bg': 'gradient-bg 15s ease infinite',
+            'float': 'float 6s ease-in-out infinite',
+            'float-reverse': 'float-reverse 7s ease-in-out infinite',
+            'fadeIn': 'fadeIn 0.6s ease-out',
+            'slideInLeft': 'slideInLeft 0.8s ease-out',
+            'slideInRight': 'slideInRight 0.8s ease-out',
+            'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+          }
+        },
+      },
+    }
+</script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+    }
+    .material-symbols-outlined.filled {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+    }
+
+    /* Aurora Background Effect */
+    .aurora-background {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .aurora-background::before,
+    .aurora-background::after {
+      content: '';
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      top: -50%;
+      left: -50%;
+      z-index: -1;
+    }
+
+    .aurora-background::before {
+      background:
+        radial-gradient(circle at 20% 50%, rgba(30, 58, 138, 0.5) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.4) 0%, transparent 50%),
+        radial-gradient(circle at 40% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 90% 10%, rgba(37, 99, 235, 0.35) 0%, transparent 50%),
+        radial-gradient(circle at 10% 90%, rgba(30, 64, 175, 0.3) 0%, transparent 50%);
+      animation: aurora-rotate 30s linear infinite;
+    }
+
+    .aurora-background::after {
+      background:
+        radial-gradient(circle at 60% 70%, rgba(29, 78, 216, 0.35) 0%, transparent 50%),
+        radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 70% 40%, rgba(37, 99, 235, 0.25) 0%, transparent 50%),
+        radial-gradient(circle at 15% 60%, rgba(59, 130, 246, 0.3) 0%, transparent 50%);
+      animation: aurora-rotate-reverse 25s linear infinite;
+    }
+
+    @keyframes aurora-rotate {
+      0% {
+        transform: rotate(0deg) scale(1);
+      }
+      50% {
+        transform: rotate(180deg) scale(1.1);
+      }
+      100% {
+        transform: rotate(360deg) scale(1);
+      }
+    }
+
+    @keyframes aurora-rotate-reverse {
+      0% {
+        transform: rotate(0deg) scale(1.05);
+      }
+      50% {
+        transform: rotate(-180deg) scale(1);
+      }
+      100% {
+        transform: rotate(-360deg) scale(1.05);
+      }
+    }
+
+    .aurora-gradient-overlay {
+      background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(37, 99, 235, 0.2), transparent);
+    }
+
+    /* Gemini Effect Styles */
+    .gemini-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .gemini-path {
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      transition: stroke-dashoffset 0.3s ease-out;
+    }
+
+    @keyframes shimmer {
+      0% {
+        stroke-opacity: 0.3;
+      }
+      50% {
+        stroke-opacity: 0.8;
+      }
+      100% {
+        stroke-opacity: 0.3;
+      }
+    }
+
+    .gemini-path.active {
+      animation: shimmer 2s ease-in-out infinite;
+    }
+</style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative w-full flex-col group/design-root overflow-x-hidden">
+
+<!-- Header -->
+<header class="sticky top-0 z-50 flex items-center justify-between p-4 bg-white/95 dark:bg-background-dark/95 backdrop-blur-md border-b border-border-light/50 dark:border-border-dark shadow-lg">
+    <div class="flex items-center gap-2">
+        <div class="bg-gradient-to-br from-primary to-primary/70 p-2 rounded-xl">
+            <span class="material-symbols-outlined filled text-white text-2xl">trending_up</span>
+        </div>
+        <span class="font-bold text-lg text-text-light dark:text-text-dark">Lidor Levin</span>
+    </div>
+    <button onclick="toggleMobileMenu()" class="flex items-center justify-center h-10 w-10 hover:bg-primary/10 rounded-lg transition-colors" id="menu-btn">
+        <span class="material-symbols-outlined text-text-light dark:text-text-dark text-3xl">menu</span>
+    </button>
+</header>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="hidden fixed top-[73px] left-0 right-0 bg-white/95 dark:bg-background-dark/95 backdrop-blur-md border-b border-border-light dark:border-border-dark z-40 shadow-lg">
+    <nav class="flex flex-col p-4 gap-2">
+        <a href="#about" onclick="toggleMobileMenu()" class="text-text-subtle-light dark:text-text-subtle-dark hover:text-primary hover:bg-primary/5 transition-all py-3 px-4 rounded-lg font-medium">About</a>
+        <a href="#how-it-works" onclick="toggleMobileMenu()" class="text-text-subtle-light dark:text-text-subtle-dark hover:text-primary hover:bg-primary/5 transition-all py-3 px-4 rounded-lg font-medium">How It Works</a>
+        <a href="#expertise" onclick="toggleMobileMenu()" class="text-text-subtle-light dark:text-text-subtle-dark hover:text-primary hover:bg-primary/5 transition-all py-3 px-4 rounded-lg font-medium">Expertise</a>
+        <a href="#testimonials" onclick="toggleMobileMenu()" class="text-text-subtle-light dark:text-text-subtle-dark hover:text-primary hover:bg-primary/5 transition-all py-3 px-4 rounded-lg font-medium">Testimonials</a>
+        <a href="#contact" onclick="toggleMobileMenu()" class="text-text-subtle-light dark:text-text-subtle-dark hover:text-primary hover:bg-primary/5 transition-all py-3 px-4 rounded-lg font-medium">Contact</a>
+    </nav>
+</div>
+
+<!-- Hero Section -->
+<div id="hero-section" class="relative w-full overflow-hidden aurora-background bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+    <div class="absolute inset-0 aurora-gradient-overlay"></div>
+
+    <!-- Gemini Effect -->
+    <div class="gemini-container">
+        <svg class="w-full h-full" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+            <defs>
+                <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:rgb(59, 130, 246);stop-opacity:0.8" />
+                    <stop offset="100%" style="stop-color:rgb(147, 197, 253);stop-opacity:0.3" />
+                </linearGradient>
+                <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:rgb(96, 165, 250);stop-opacity:0.7" />
+                    <stop offset="100%" style="stop-color:rgb(219, 234, 254);stop-opacity:0.3" />
+                </linearGradient>
+                <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:rgb(147, 197, 253);stop-opacity:0.6" />
+                    <stop offset="100%" style="stop-color:rgb(255, 255, 255);stop-opacity:0.2" />
+                </linearGradient>
+            </defs>
+            <path class="gemini-path" d="M 0,400 Q 300,200 600,400 T 1200,400" stroke="url(#gradient1)" stroke-width="2" fill="none" />
+            <path class="gemini-path" d="M 0,450 Q 300,250 600,450 T 1200,450" stroke="url(#gradient2)" stroke-width="2" fill="none" />
+            <path class="gemini-path" d="M 0,350 Q 300,150 600,350 T 1200,350" stroke="url(#gradient3)" stroke-width="2" fill="none" />
+            <path class="gemini-path" d="M 0,500 Q 300,300 600,500 T 1200,500" stroke="url(#gradient1)" stroke-width="1.5" fill="none" />
+            <path class="gemini-path" d="M 0,300 Q 300,100 600,300 T 1200,300" stroke="url(#gradient2)" stroke-width="1.5" fill="none" />
+        </svg>
+    </div>
+
+    <div class="absolute inset-0 opacity-5">
+        <span class="material-symbols-outlined filled absolute top-[10%] left-[5%] text-6xl text-white animate-float" style="animation-delay: -1s;">account_balance</span>
+        <span class="material-symbols-outlined filled absolute top-[20%] right-[10%] text-5xl text-white animate-float-reverse">trending_up</span>
+        <span class="material-symbols-outlined filled absolute top-[65%] left-[15%] text-7xl text-white animate-float">monetization_on</span>
+        <span class="material-symbols-outlined filled absolute bottom-[10%] right-[5%] text-6xl text-white animate-float" style="animation-delay: -2s;">payments</span>
+        <span class="material-symbols-outlined filled absolute bottom-[25%] left-[30%] text-4xl text-white animate-float-reverse">credit_card</span>
+        <span class="material-symbols-outlined filled absolute top-[50%] right-[25%] text-4xl text-white animate-float">savings</span>
+        <span class="material-symbols-outlined filled absolute top-[80%] right-[40%] text-5xl text-white animate-float-reverse" style="animation-delay: -0.5s;">show_chart</span>
+    </div>
+    <div class="relative flex min-h-[600px] flex-col gap-8 items-center justify-center p-6 text-center">
+        <div class="flex flex-col gap-6 max-w-4xl">
+            <div class="inline-block px-6 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-semibold mb-4">
+                ✨ Professional Financial Guidance
+            </div>
+            <h1 class="text-white text-5xl font-black leading-tight tracking-tight sm:text-6xl md:text-7xl lg:text-8xl drop-shadow-2xl">Your Path to Financial <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/70">Freedom</span></h1>
+            <p class="text-white text-xl font-medium leading-relaxed sm:text-2xl md:text-3xl drop-shadow-lg">Personalized financial guidance for young couples and individuals.</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4 mt-4">
+            <a href="#contact" class="flex items-center justify-center gap-2 rounded-full h-16 px-10 bg-white text-primary text-lg font-bold leading-normal tracking-wide transition-all hover:scale-105 hover:shadow-2xl shadow-xl animate-pulse-glow">
+                <span class="material-symbols-outlined">rocket_launch</span>
+                <span>Book Free Consultation</span>
+            </a>
+            <a href="#how-it-works" class="flex items-center justify-center gap-2 rounded-full h-16 px-10 bg-transparent border-2 border-white text-white text-lg font-bold leading-normal tracking-wide transition-all hover:bg-white hover:text-primary hover:scale-105 shadow-xl">
+                <span class="material-symbols-outlined">play_circle</span>
+                <span>Learn More</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- About Section -->
+<div id="about" class="relative px-6 py-24 overflow-hidden bg-white dark:bg-background-dark">
+    <div class="max-w-4xl mx-auto text-center">
+        <div class="space-y-6">
+            <div class="inline-block px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-semibold">
+                ABOUT ME
+            </div>
+            <h2 class="text-text-light dark:text-text-dark text-4xl sm:text-5xl font-black leading-tight">Building Your Financial Future Together</h2>
+            <p class="text-text-subtle-light dark:text-text-subtle-dark text-lg leading-relaxed max-w-3xl mx-auto">
+                I'm <span class="font-bold text-primary text-xl">Lidor Levin</span>, and my passion is helping people like you navigate the complexities of personal finance.
+            </p>
+            <p class="text-text-subtle-light dark:text-text-subtle-dark text-base leading-relaxed max-w-3xl mx-auto">
+                With a focus on long-term strategies, I provide clear, actionable guidance to help you achieve your financial goals with confidence. Whether you're just starting out or looking to optimize your portfolio, I'm here to guide you every step of the way.
+            </p>
+            <div class="flex flex-wrap gap-4 pt-8 justify-center">
+                <div class="flex items-center gap-2 bg-primary/5 px-4 py-2 rounded-full">
+                    <span class="material-symbols-outlined text-primary">trending_up</span>
+                    <span class="font-semibold text-text-light">Market Expert</span>
+                </div>
+                <div class="flex items-center gap-2 bg-primary/5 px-4 py-2 rounded-full">
+                    <span class="material-symbols-outlined text-primary">home</span>
+                    <span class="font-semibold text-text-light">Real Estate Pro</span>
+                </div>
+                <div class="flex items-center gap-2 bg-primary/5 px-4 py-2 rounded-full">
+                    <span class="material-symbols-outlined text-primary">psychology</span>
+                    <span class="font-semibold text-text-light">Strategic Planning</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- How It Works -->
+<div id="how-it-works" class="relative w-full overflow-hidden aurora-background bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+    <div class="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-blue-800/10 to-transparent"></div>
+    <div class="relative px-6 py-24 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <div class="inline-block px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-semibold mb-6">
+                HOW IT WORKS
+            </div>
+            <h2 class="text-white text-4xl sm:text-5xl md:text-6xl font-black leading-tight tracking-tight mb-6 drop-shadow-lg">Three Simple Steps</h2>
+            <p class="text-white text-xl max-w-2xl mx-auto drop-shadow-md">Transform your financial future with our proven process</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="group relative">
+                <div class="absolute -inset-1 bg-gradient-to-r from-white to-white/50 rounded-3xl blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
+                <div class="relative flex flex-col gap-6 rounded-3xl bg-white p-10 shadow-2xl hover:shadow-[0_30px_70px_rgba(0,0,0,0.3)] transition-all duration-300 hover:-translate-y-3">
+                    <div class="flex items-center justify-between">
+                        <div class="bg-gradient-to-br from-primary to-primary/70 w-20 h-20 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined filled text-white" style="font-size: 48px;">phone_in_talk</span>
+                        </div>
+                        <div class="text-6xl font-black text-primary/10">01</div>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <h3 class="text-text-light text-2xl font-bold leading-tight">Discovery Call</h3>
+                        <p class="text-text-subtle-light text-base leading-relaxed">Let's chat about your goals and see if we're a good fit. No pressure, just an honest conversation about your financial future.</p>
+                    </div>
+                    <div class="pt-4 border-t border-border-light">
+                        <span class="text-primary font-semibold text-sm">FREE 30-MIN SESSION</span>
+                    </div>
+                </div>
+            </div>
+            <div class="group relative md:mt-8">
+                <div class="absolute -inset-1 bg-gradient-to-r from-white to-white/50 rounded-3xl blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
+                <div class="relative flex flex-col gap-6 rounded-3xl bg-white p-10 shadow-2xl hover:shadow-[0_30px_70px_rgba(0,0,0,0.3)] transition-all duration-300 hover:-translate-y-3">
+                    <div class="flex items-center justify-between">
+                        <div class="bg-gradient-to-br from-primary to-primary/70 w-20 h-20 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined filled text-white" style="font-size: 48px;">edit_document</span>
+                        </div>
+                        <div class="text-6xl font-black text-primary/10">02</div>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <h3 class="text-text-light text-2xl font-bold leading-tight">Create Your Plan</h3>
+                        <p class="text-text-subtle-light text-base leading-relaxed">We'll build a personalized financial strategy tailored to your unique situation, goals, and timeline.</p>
+                    </div>
+                    <div class="pt-4 border-t border-border-light">
+                        <span class="text-primary font-semibold text-sm">CUSTOM STRATEGY</span>
+                    </div>
+                </div>
+            </div>
+            <div class="group relative md:mt-16">
+                <div class="absolute -inset-1 bg-gradient-to-r from-white to-white/50 rounded-3xl blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
+                <div class="relative flex flex-col gap-6 rounded-3xl bg-white p-10 shadow-2xl hover:shadow-[0_30px_70px_rgba(0,0,0,0.3)] transition-all duration-300 hover:-translate-y-3">
+                    <div class="flex items-center justify-between">
+                        <div class="bg-gradient-to-br from-primary to-primary/70 w-20 h-20 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined filled text-white" style="font-size: 48px;">rocket_launch</span>
+                        </div>
+                        <div class="text-6xl font-black text-primary/10">03</div>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <h3 class="text-text-light text-2xl font-bold leading-tight">Achieve Your Goals</h3>
+                        <p class="text-text-subtle-light text-base leading-relaxed">Put your plan into action with ongoing support and watch your financial future grow and flourish.</p>
+                    </div>
+                    <div class="pt-4 border-t border-border-light">
+                        <span class="text-primary font-semibold text-sm">ONGOING SUPPORT</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Expertise Section -->
+<div id="expertise" class="relative px-6 py-24 bg-gradient-to-br from-background-light to-white dark:from-background-dark dark:to-black">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <div class="inline-block px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-semibold mb-6">
+                MY EXPERTISE
+            </div>
+            <h2 class="text-text-light dark:text-text-dark text-4xl sm:text-5xl md:text-6xl font-black leading-tight mb-6">Specialized Financial Services</h2>
+            <p class="text-text-subtle-light dark:text-text-subtle-dark text-xl max-w-2xl mx-auto">Tailored strategies that grow with you and your family</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="group relative overflow-hidden rounded-3xl bg-white dark:bg-background-dark shadow-xl hover:shadow-2xl transition-all duration-500">
+                <div class="absolute top-0 right-0 w-40 h-40 bg-primary/5 rounded-full -translate-y-20 translate-x-20 group-hover:scale-150 transition-transform duration-500"></div>
+                <div class="relative p-8 space-y-6">
+                    <div class="bg-gradient-to-br from-primary to-primary/60 w-24 h-24 rounded-3xl flex items-center justify-center shadow-lg group-hover:rotate-6 transition-transform duration-300">
+                        <span class="material-symbols-outlined filled text-white" style="font-size: 56px;">trending_up</span>
+                    </div>
+                    <div>
+                        <h3 class="text-text-light dark:text-text-dark text-2xl font-bold leading-tight mb-3">Capital Market Investments</h3>
+                        <p class="text-text-subtle-light dark:text-text-subtle-dark text-base leading-relaxed">Navigating the stock market to build your wealth intelligently through diversified portfolios and strategic allocation.</p>
+                    </div>
+                    <div class="space-y-3 pt-4 border-t border-border-light dark:border-border-dark">
+                        <div class="flex items-center gap-3 text-primary font-semibold group-hover:translate-x-2 transition-transform">
+                            <span class="material-symbols-outlined filled bg-primary/10 p-1 rounded-lg">check_circle</span>
+                            <span>Stock Portfolio Strategy</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-primary font-semibold group-hover:translate-x-2 transition-transform" style="transition-delay: 50ms;">
+                            <span class="material-symbols-outlined filled bg-primary/10 p-1 rounded-lg">check_circle</span>
+                            <span>Risk Management</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-primary font-semibold group-hover:translate-x-2 transition-transform" style="transition-delay: 100ms;">
+                            <span class="material-symbols-outlined filled bg-primary/10 p-1 rounded-lg">check_circle</span>
+                            <span>Long-term Growth</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="group relative overflow-hidden rounded-3xl bg-white dark:bg-background-dark shadow-xl hover:shadow-2xl transition-all duration-500">
+                <div class="absolute top-0 right-0 w-40 h-40 bg-primary/5 rounded-full -translate-y-20 translate-x-20 group-hover:scale-150 transition-transform duration-500"></div>
+                <div class="relative p-8 space-y-6">
+                    <div class="bg-gradient-to-br from-primary to-primary/60 w-24 h-24 rounded-3xl flex items-center justify-center shadow-lg group-hover:rotate-6 transition-transform duration-300">
+                        <span class="material-symbols-outlined filled text-white" style="font-size: 56px;">home</span>
+                    </div>
+                    <div>
+                        <h3 class="text-text-light dark:text-text-dark text-2xl font-bold leading-tight mb-3">Real Estate Investments</h3>
+                        <p class="text-text-subtle-light dark:text-text-subtle-dark text-base leading-relaxed">Guidance on purchasing your first home and property investments to build lasting wealth and security.</p>
+                    </div>
+                    <div class="space-y-3 pt-4 border-t border-border-light dark:border-border-dark">
+                        <div class="flex items-center gap-3 text-primary font-semibold group-hover:translate-x-2 transition-transform">
+                            <span class="material-symbols-outlined filled bg-primary/10 p-1 rounded-lg">check_circle</span>
+                            <span>First Home Purchase</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-primary font-semibold group-hover:translate-x-2 transition-transform" style="transition-delay: 50ms;">
+                            <span class="material-symbols-outlined filled bg-primary/10 p-1 rounded-lg">check_circle</span>
+                            <span>Investment Properties</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-primary font-semibold group-hover:translate-x-2 transition-transform" style="transition-delay: 100ms;">
+                            <span class="material-symbols-outlined filled bg-primary/10 p-1 rounded-lg">check_circle</span>
+                            <span>Market Analysis</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="group relative overflow-hidden rounded-3xl bg-white dark:bg-background-dark shadow-xl hover:shadow-2xl transition-all duration-500">
+                <div class="absolute top-0 right-0 w-40 h-40 bg-primary/5 rounded-full -translate-y-20 translate-x-20 group-hover:scale-150 transition-transform duration-500"></div>
+                <div class="relative p-8 space-y-6">
+                    <div class="bg-gradient-to-br from-primary to-primary/60 w-24 h-24 rounded-3xl flex items-center justify-center shadow-lg group-hover:rotate-6 transition-transform duration-300">
+                        <span class="material-symbols-outlined filled text-white" style="font-size: 56px;">auto_graph</span>
+                    </div>
+                    <div>
+                        <h3 class="text-text-light dark:text-text-dark text-2xl font-bold leading-tight mb-3">Long-Term Financial Strategy</h3>
+                        <p class="text-text-subtle-light dark:text-text-subtle-dark text-base leading-relaxed">Creating a sustainable plan for your financial independence and future that adapts as your life evolves.</p>
+                    </div>
+                    <div class="space-y-3 pt-4 border-t border-border-light dark:border-border-dark">
+                        <div class="flex items-center gap-3 text-primary font-semibold group-hover:translate-x-2 transition-transform">
+                            <span class="material-symbols-outlined filled bg-primary/10 p-1 rounded-lg">check_circle</span>
+                            <span>Retirement Planning</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-primary font-semibold group-hover:translate-x-2 transition-transform" style="transition-delay: 50ms;">
+                            <span class="material-symbols-outlined filled bg-primary/10 p-1 rounded-lg">check_circle</span>
+                            <span>Wealth Preservation</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-primary font-semibold group-hover:translate-x-2 transition-transform" style="transition-delay: 100ms;">
+                            <span class="material-symbols-outlined filled bg-primary/10 p-1 rounded-lg">check_circle</span>
+                            <span>Goal Achievement</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Testimonials -->
+<div id="testimonials" class="relative w-full overflow-hidden aurora-background bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+    <div class="absolute inset-0 bg-gradient-to-br from-blue-900/15 via-blue-800/10 to-transparent"></div>
+    <div class="relative px-6 py-24 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <div class="inline-block px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-semibold mb-6">
+                TESTIMONIALS
+            </div>
+            <h2 class="text-white text-4xl sm:text-5xl md:text-6xl font-black leading-tight mb-6 drop-shadow-lg">Success Stories</h2>
+            <p class="text-white text-xl max-w-2xl mx-auto drop-shadow-md">Real transformations from people we've helped</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="group relative">
+                <div class="absolute -inset-1 bg-gradient-to-r from-white to-white/50 rounded-3xl blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
+                <div class="relative flex flex-col rounded-3xl bg-white shadow-2xl overflow-hidden hover:shadow-[0_30px_70px_rgba(0,0,0,0.3)] transition-all duration-300 hover:-translate-y-2">
+                    <div class="bg-gradient-to-br from-primary to-primary/60 p-12 text-center">
+                        <div class="w-24 h-24 mx-auto bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mb-4">
+                            <span class="material-symbols-outlined filled text-white text-6xl">celebration</span>
+                        </div>
+                        <div class="flex gap-1 justify-center">
+                            <span class="material-symbols-outlined filled text-yellow-400 text-3xl">star</span>
+                            <span class="material-symbols-outlined filled text-yellow-400 text-3xl">star</span>
+                            <span class="material-symbols-outlined filled text-yellow-400 text-3xl">star</span>
+                            <span class="material-symbols-outlined filled text-yellow-400 text-3xl">star</span>
+                            <span class="material-symbols-outlined filled text-yellow-400 text-3xl">star</span>
+                        </div>
+                    </div>
+                    <div class="p-8 space-y-5">
+                        <p class="text-2xl font-bold text-text-light">"A game-changer for my finances!"</p>
+                        <p class="text-text-subtle-light text-lg leading-relaxed">"Lidor completely transformed how I think about investing. His guidance on capital markets helped me build a diversified portfolio that's already showing great returns. I feel confident about my financial future for the first time."</p>
+                        <div class="flex items-center gap-4 pt-4 border-t-2 border-border-light">
+                            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center shadow-lg">
+                                <span class="material-symbols-outlined filled text-white text-3xl">person</span>
+                            </div>
+                            <div>
+                                <p class="text-primary font-bold text-xl">David S.</p>
+                                <p class="text-text-subtle-light text-sm">Software Engineer</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="group relative">
+                <div class="absolute -inset-1 bg-gradient-to-r from-white to-white/50 rounded-3xl blur opacity-25 group-hover:opacity-75 transition duration-300"></div>
+                <div class="relative flex flex-col rounded-3xl bg-white shadow-2xl overflow-hidden hover:shadow-[0_30px_70px_rgba(0,0,0,0.3)] transition-all duration-300 hover:-translate-y-2">
+                    <div class="bg-gradient-to-br from-primary to-primary/60 p-12 text-center">
+                        <div class="w-24 h-24 mx-auto bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mb-4">
+                            <span class="material-symbols-outlined filled text-white text-6xl">volunteer_activism</span>
+                        </div>
+                        <div class="flex gap-1 justify-center">
+                            <span class="material-symbols-outlined filled text-yellow-400 text-3xl">star</span>
+                            <span class="material-symbols-outlined filled text-yellow-400 text-3xl">star</span>
+                            <span class="material-symbols-outlined filled text-yellow-400 text-3xl">star</span>
+                            <span class="material-symbols-outlined filled text-yellow-400 text-3xl">star</span>
+                            <span class="material-symbols-outlined filled text-yellow-400 text-3xl">star</span>
+                        </div>
+                    </div>
+                    <div class="p-8 space-y-5">
+                        <p class="text-2xl font-bold text-text-light">"Professional and patient"</p>
+                        <p class="text-text-subtle-light text-lg leading-relaxed">"As a young couple, we were overwhelmed by financial planning. Lidor made it simple and helped us save for our first apartment. He's patient, knowledgeable, and genuinely cares about our success. Highly recommend!"</p>
+                        <div class="flex items-center gap-4 pt-4 border-t-2 border-border-light">
+                            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center shadow-lg">
+                                <span class="material-symbols-outlined filled text-white text-3xl">favorite</span>
+                            </div>
+                            <div>
+                                <p class="text-primary font-bold text-xl">Rachel & Michael</p>
+                                <p class="text-text-subtle-light text-sm">Young Couple</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Contact Section -->
+<div id="contact" class="relative px-6 py-24 bg-gradient-to-br from-white to-background-light dark:from-background-dark dark:to-black">
+    <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+            <div class="inline-block px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-semibold mb-6">
+                GET IN TOUCH
+            </div>
+            <h2 class="text-text-light dark:text-text-dark text-4xl sm:text-5xl md:text-6xl font-black leading-tight mb-6">Ready to Take Control?</h2>
+            <p class="text-text-subtle-light dark:text-text-subtle-dark text-xl leading-relaxed max-w-2xl mx-auto">Fill out the form below for a free, no-obligation consultation. Let's start building your financial future together.</p>
+        </div>
+        <div class="relative">
+            <div class="absolute -inset-4 bg-gradient-to-r from-primary to-primary/50 rounded-3xl blur opacity-20"></div>
+            <form action="#" class="relative space-y-6 bg-white dark:bg-background-dark p-10 rounded-3xl shadow-2xl" method="POST">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="flex items-center gap-2 text-base font-bold leading-6 text-text-light dark:text-text-dark mb-3" for="full-name">
+                            <span class="material-symbols-outlined text-primary">person</span>
+                            Full Name
+                        </label>
+                        <input autocomplete="name" class="block w-full rounded-xl border-0 py-4 px-5 text-text-light dark:text-text-dark bg-background-light dark:bg-background-dark shadow-sm ring-2 ring-inset ring-border-light dark:ring-border-dark placeholder:text-text-subtle-light focus:ring-2 focus:ring-primary sm:text-base transition-all" id="full-name" name="full-name" placeholder="Your Name" type="text" required/>
+                    </div>
+                    <div>
+                        <label class="flex items-center gap-2 text-base font-bold leading-6 text-text-light dark:text-text-dark mb-3" for="email">
+                            <span class="material-symbols-outlined text-primary">email</span>
+                            Email Address
+                        </label>
+                        <input autocomplete="email" class="block w-full rounded-xl border-0 py-4 px-5 text-text-light dark:text-text-dark bg-background-light dark:bg-background-dark shadow-sm ring-2 ring-inset ring-border-light dark:ring-border-dark placeholder:text-text-subtle-light focus:ring-2 focus:ring-primary sm:text-base transition-all" id="email" name="email" placeholder="you@example.com" type="email" required/>
+                    </div>
+                </div>
+                <div>
+                    <label class="flex items-center gap-2 text-base font-bold leading-6 text-text-light dark:text-text-dark mb-3" for="location">
+                        <span class="material-symbols-outlined text-primary">location_on</span>
+                        Location (City/Region)
+                    </label>
+                    <input autocomplete="address-level2" class="block w-full rounded-xl border-0 py-4 px-5 text-text-light dark:text-text-dark bg-background-light dark:bg-background-dark shadow-sm ring-2 ring-inset ring-border-light dark:ring-border-dark placeholder:text-text-subtle-light focus:ring-2 focus:ring-primary sm:text-base transition-all" id="location" name="location" placeholder="e.g., Tel Aviv" type="text"/>
+                </div>
+                <div>
+                    <label class="flex items-center gap-2 text-base font-bold leading-6 text-text-light dark:text-text-dark mb-3" for="experience">
+                        <span class="material-symbols-outlined text-primary">school</span>
+                        Investment Experience
+                    </label>
+                    <select class="block w-full rounded-xl border-0 py-4 px-5 text-text-light dark:text-text-dark bg-background-light dark:bg-background-dark shadow-sm ring-2 ring-inset ring-border-light dark:ring-border-dark focus:ring-2 focus:ring-primary sm:text-base transition-all" id="experience" name="experience">
+                        <option>New to Investing</option>
+                        <option>Some Stock Market Experience</option>
+                        <option>Planning for First Home</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="pt-4">
+                    <button class="flex w-full justify-center items-center gap-3 rounded-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary px-8 py-6 text-xl font-bold leading-7 text-white shadow-xl hover:shadow-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-all transform hover:scale-105" type="submit">
+                        <span class="material-symbols-outlined text-3xl">send</span>
+                        <span>Get Started - Let's Talk!</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="relative bg-gradient-to-br from-gray-900 via-gray-800 to-black pt-16 pb-8 px-6 text-center overflow-hidden">
+    <div class="absolute inset-0 opacity-5">
+        <span class="material-symbols-outlined filled absolute top-[10%] left-[5%] text-6xl text-white animate-float">account_balance</span>
+        <span class="material-symbols-outlined filled absolute top-[20%] right-[10%] text-5xl text-white animate-float-reverse">trending_up</span>
+        <span class="material-symbols-outlined filled absolute bottom-[20%] left-[15%] text-7xl text-white animate-float">monetization_on</span>
+        <span class="material-symbols-outlined filled absolute bottom-[30%] right-[5%] text-6xl text-white animate-float-reverse">savings</span>
+    </div>
+    <div class="relative z-10 flex flex-col items-center gap-8 max-w-4xl mx-auto">
+        <div class="flex items-center gap-3">
+            <div class="bg-gradient-to-br from-primary to-primary/70 p-3 rounded-xl">
+                <span class="material-symbols-outlined filled text-white text-3xl">trending_up</span>
+            </div>
+            <span class="font-bold text-3xl text-white">Lidor Levin</span>
+        </div>
+        <p class="text-gray-400 text-lg max-w-md leading-relaxed">Your trusted partner in building lasting wealth and financial freedom.</p>
+        <a href="#contact" class="flex items-center justify-center gap-2 rounded-full h-14 px-8 bg-primary hover:bg-primary/90 text-white text-lg font-bold leading-normal tracking-wide transition-all transform hover:scale-105 shadow-xl hover:shadow-2xl">
+            <span class="material-symbols-outlined">rocket_launch</span>
+            <span>Get Started Today</span>
+        </a>
+        <div class="flex gap-6 pt-6">
+            <a class="text-gray-400 hover:text-primary transition-all transform hover:scale-125 bg-white/5 p-3 rounded-full hover:bg-white/10" href="#" aria-label="Facebook">
+                <svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path clip-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" fill-rule="evenodd"></path>
+                </svg>
+            </a>
+            <a class="text-gray-400 hover:text-primary transition-all transform hover:scale-125 bg-white/5 p-3 rounded-full hover:bg-white/10" href="#" aria-label="Twitter">
+                <svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
+                </svg>
+            </a>
+            <a class="text-gray-400 hover:text-primary transition-all transform hover:scale-125 bg-white/5 p-3 rounded-full hover:bg-white/10" href="#" aria-label="LinkedIn">
+                <svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+            </a>
+        </div>
+        <div class="pt-8 border-t border-white/10 w-full">
+            <p class="text-sm text-gray-500">© 2024 Lidor Levin. All rights reserved. | Your trusted partner in financial planning</p>
+        </div>
+    </div>
+</footer>
+
+</div>
+
+<script>
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        const menuBtn = document.getElementById('menu-btn');
+
+        if (menu.classList.contains('hidden')) {
+            menu.classList.remove('hidden');
+            menuBtn.querySelector('.material-symbols-outlined').textContent = 'close';
+        } else {
+            menu.classList.add('hidden');
+            menuBtn.querySelector('.material-symbols-outlined').textContent = 'menu';
+        }
+    }
+
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                const offsetTop = target.offsetTop - 80;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+        const menu = document.getElementById('mobile-menu');
+        const menuBtn = document.getElementById('menu-btn');
+
+        if (!menu.contains(event.target) && !menuBtn.contains(event.target) && !menu.classList.contains('hidden')) {
+            menu.classList.add('hidden');
+            menuBtn.querySelector('.material-symbols-outlined').textContent = 'menu';
+        }
+    });
+
+    // Gemini Effect Scroll Animation
+    const heroSection = document.getElementById('hero-section');
+    const geminiPaths = document.querySelectorAll('.gemini-path');
+
+    function updateGeminiEffect() {
+        if (!heroSection) return;
+
+        const rect = heroSection.getBoundingClientRect();
+        const scrollProgress = Math.max(0, Math.min(1, 1 - (rect.bottom / window.innerHeight)));
+
+        geminiPaths.forEach((path, index) => {
+            const pathLength = path.getTotalLength();
+            const delay = index * 0.1;
+            const adjustedProgress = Math.max(0, Math.min(1, (scrollProgress - delay) / (1 - delay)));
+
+            // Animate stroke-dashoffset based on scroll
+            const offset = pathLength * (1 - adjustedProgress * 1.2);
+            path.style.strokeDashoffset = offset;
+
+            // Add active class when path is being drawn
+            if (adjustedProgress > 0.1 && adjustedProgress < 0.9) {
+                path.classList.add('active');
+            } else {
+                path.classList.remove('active');
+            }
+        });
+    }
+
+    // Update on scroll and load
+    window.addEventListener('scroll', updateGeminiEffect);
+    window.addEventListener('load', updateGeminiEffect);
+    updateGeminiEffect();
+</script>
+
+</body>
+</html>
